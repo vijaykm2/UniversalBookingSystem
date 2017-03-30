@@ -1,6 +1,7 @@
 package com.bookingsystem;
 
-import com.bookingsystem.daoimpl.*;
+import com.bookingsystem.daoimpl.CustomerDao;
+import com.bookingsystem.daoimpl.ReservationDao;
 import com.bookingsystem.entities.Customer;
 import com.bookingsystem.entities.Reservation;
 import com.zaxxer.hikari.HikariConfig;
