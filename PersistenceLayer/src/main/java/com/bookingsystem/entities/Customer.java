@@ -8,7 +8,7 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer implements BaseEntity, Comparable<Customer> {
+public class Customer extends BaseEntity implements Comparable<Customer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,9 @@ public class Customer implements BaseEntity, Comparable<Customer> {
 
     @Column(name = "FIRST_NAME")
     private final String firstName;
+
+    @Column(name = "MIDDLE_NAME")
+    private final String middleName;
 
     @Column(name = "LAST_NAME")
     private final String lastName;
@@ -30,57 +33,40 @@ public class Customer implements BaseEntity, Comparable<Customer> {
     @Column( name = "EMAIL_ID")
     private final String email;
 
-    @Column(name = "ADDRESS_LINE_1")
-    private final String addressLine1;
-
-    @Column(name = "ADDRESS_LINE_2")
-    private final String addressLine2;
-
-    @Column(name = "STATE")
-    private final String state;
-
-    @Column(name = "COUNTRY")
-    private final String country;
-
-    @Column(name = "ZIP_CODE")
-    private final String zipCode;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "RESERVATION")
     private final Reservation reservation;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ADDRESS")
+    private final Address address;
 
-    private Customer(Long id, String firstName, String lastName, LocalDate dob, String gender, String addressLine1, String addressLine2, String state, String country, String zipCode, String email, Reservation reservation) {
+
+    private Customer(Long id, String firstName, String middleName, String lastName, LocalDate dob, String gender, String email, Reservation reservation, Address address) {
         this.id = id;
         this.firstName = firstName;
+        this.middleName = middleName;
         this.lastName = lastName;
         this.dob = dob;
         this.gender = gender;
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
-        this.state = state;
-        this.country = country;
-        this.zipCode = zipCode;
         this.reservation = reservation;
         this.email = email;
+        this.address = address;
     }
 
     private Customer(){
         id = null;
         firstName = null;
+        middleName = null;
         lastName = null;
         dob = null;
         gender = null;
-        addressLine1 = null;
-        state = null;
-        addressLine2 = null;
-        country = null;
-        zipCode = null;
         reservation = null;
         email = null;
+        address = null;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -100,28 +86,6 @@ public class Customer implements BaseEntity, Comparable<Customer> {
         return gender;
     }
 
-    public String getAddressLine1() {
-        return addressLine1;
-    }
-
-    public String getAddressLine2() {
-        return addressLine2;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public String getEmail() {return email; }
-
     public Reservation getReservation() {
         return reservation;
     }
@@ -137,12 +101,6 @@ public class Customer implements BaseEntity, Comparable<Customer> {
         if (lastName != null ? !lastName.equals(that.getLastName()) : that.getLastName() != null) return false;
         if (dob != null ? !dob.equals(that.getDob()) : that.getDob() != null) return false;
         if (gender != null ? !gender.equals(that.getGender()) : that.getGender() != null) return false;
-        if (addressLine1 != null ? !addressLine1.equals(that.getAddressLine1()) : that.getAddressLine1() != null) return false;
-        if (addressLine2 != null ? !addressLine2.equals(that.getAddressLine2()) : that.getAddressLine2() != null) return false;
-        if (state != null ? !state.equals(that.getState()) : that.getState() != null) return false;
-        if (country != null ? !country.equals(that.getCountry()) : that.getCountry() != null) return false;
-        if (zipCode != null ? !zipCode.equals(that.getZipCode()) : that.getZipCode() != null) return false;
-        if (email != null ? !email.equals(that.getEmail()) : that.getEmail() != null) return false;
         return true;
     }
 
@@ -153,11 +111,6 @@ public class Customer implements BaseEntity, Comparable<Customer> {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (dob != null ? dob.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
-        result = 31 * result + (addressLine1 != null ? addressLine1.hashCode() : 0);
-        result = 31 * result + (addressLine2 != null ? addressLine2.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
-        result = 31 * result + (country != null ? country.hashCode() : 0);
-        result = 31 * result + (zipCode != null ? zipCode.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
@@ -170,11 +123,6 @@ public class Customer implements BaseEntity, Comparable<Customer> {
                 ", lastName='" + lastName + '\'' +
                 ", dob=" + dob +
                 ", gender='" + gender + '\'' +
-                ", addressLine1='" + addressLine1 + '\'' +
-                ", addressLine2='" + addressLine2 + '\'' +
-                ", state='" + state + '\'' +
-                ", country='" + country + '\'' +
-                ", zipCode='" + zipCode +
                 '}';
     }
 
@@ -183,9 +131,18 @@ public class Customer implements BaseEntity, Comparable<Customer> {
         return this.lastName.compareToIgnoreCase(o.lastName);
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
     public static class Builder{
         private Long id;
         private String firstName;
+        private String middleName;
         private String lastName;
         private LocalDate dob;
         private String gender;
@@ -195,6 +152,8 @@ public class Customer implements BaseEntity, Comparable<Customer> {
         private String country;
         private String zipCode;
         private String email;
+        private String city;
+        private Address address;
 
         private Reservation reservation;
 
@@ -205,6 +164,11 @@ public class Customer implements BaseEntity, Comparable<Customer> {
 
         public Builder setFirstName(String firstName) {
             this.firstName = firstName;
+            return this;
+        }
+
+        public Builder setMiddleName(String middleName) {
+            this.middleName = middleName;
             return this;
         }
 
@@ -258,21 +222,40 @@ public class Customer implements BaseEntity, Comparable<Customer> {
             return this;
         }
 
+        public Builder setAddress(Address address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder setCustomer(Customer customer) {
+            address = customer.getAddress();
+            id = customer.getId();
+            lastName = customer.getLastName();
+            middleName = customer.middleName;
+            firstName = customer.getFirstName();
+            gender = customer.getGender();
+            return this;
+        }
+
         public Customer build(){
-            return new Customer(
+            Address.AddressBuilder addressBuilder= new Address.AddressBuilder();
+            if (address == null ){
+                addressBuilder = new Address.AddressBuilder().setAddressLine1(addressLine1).setAddressLine2(addressLine2).setCity(city).setCountry(country).setZipCode(zipCode).setState(state);
+                address = addressBuilder.build();
+            }
+
+            Customer cust = new Customer(
                     id,
                     firstName,
+                    middleName,
                     lastName,
                     dob,
                     gender,
-                    addressLine1,
-                    addressLine2,
-                    state,
-                    country,
-                    zipCode,
                     email,
-                    reservation
+                    reservation,
+                    address
             );
+            return cust;
         }
     }
 

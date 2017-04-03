@@ -12,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "RESERVATION")
-public class Reservation implements BaseEntity, Comparable<Reservation>{
+public class Reservation extends BaseEntity implements Comparable<Reservation>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")

@@ -1,7 +1,7 @@
 package com.bookingsystem;
 
-import com.bookingsystem.daoimpl.CustomerDao;
-import com.bookingsystem.daoimpl.ReservationDao;
+import com.bookingsystem.dao.CustomerDao;
+import com.bookingsystem.dao.ReservationDao;
 import com.bookingsystem.entities.Customer;
 import com.bookingsystem.entities.Reservation;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class ReservationDaoTest {
 
     @Test
     @Transactional
-    @Rollback(true)
+    @Rollback(false)
     public void testInsertReservation(){
 
 
@@ -85,9 +85,9 @@ public class ReservationDaoTest {
                 .setZipCode("192291")
                 .setReservation(reservation).build();
 
-        customerDao.saveOrUpdate(pax1);
-        customerDao.saveOrUpdate(pax2);
-        customerDao.saveOrUpdate(pax3);
+        customerDao.saveOrUpdate(pax1,true);
+        customerDao.saveOrUpdate(pax2, true);
+        customerDao.saveOrUpdate(pax3, true);
 
         Set<Customer> passengers = reservation.getCustomers();
         passengers.add(pax1);

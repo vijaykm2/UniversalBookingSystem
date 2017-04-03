@@ -1,8 +1,10 @@
 package com.bookingsystem;
 
-import com.bookingsystem.daoimpl.CustomerDao;
-import com.bookingsystem.daoimpl.ReservationDao;
+import com.bookingsystem.dao.CustomerDao;
+import com.bookingsystem.dao.ReservationDao;
+import com.bookingsystem.entities.Address;
 import com.bookingsystem.entities.Customer;
+import com.bookingsystem.entities.Location;
 import com.bookingsystem.entities.Reservation;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -86,6 +88,8 @@ public class PersistenceConfig {
         //sessionBuilder.setDataSource(dataSource);
         sessionBuilder.addAnnotatedClasses(Reservation.class);
         sessionBuilder.addAnnotatedClasses(Customer.class);
+        sessionBuilder.addAnnotatedClasses(Location.class);
+        sessionBuilder.addAnnotatedClasses(Address.class);
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", dialect);
         hibernateProperties.put("hibernate.show_sql", showSql);

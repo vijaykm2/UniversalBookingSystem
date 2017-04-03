@@ -1,6 +1,6 @@
 package com.bookingsystem.businessObjects;
 
-import com.bookingsystem.daoimpl.CustomerDao;
+import com.bookingsystem.dao.CustomerDao;
 
 /**
  * Created by vijay on 3/9/17.
