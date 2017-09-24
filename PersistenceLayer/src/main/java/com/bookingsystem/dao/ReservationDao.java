@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by vijay on 2/27/17.
  */
-public class ReservationDao extends BaseEntityDao {
+final public class ReservationDao extends BaseEntityDao {
 
 
     public ReservationDao(SessionFactory sessionFactory) {

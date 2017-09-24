@@ -13,8 +13,8 @@ import java.util.Map;
 /**
  * Created by vijay on 2/27/17.
  */
-public class CustomerDao extends BaseEntityDao {
-    private SessionFactory sessionFactory;
+final public class CustomerDao extends BaseEntityDao {
+    //private final SessionFactory sessionFactory;
 
     public CustomerDao(SessionFactory sessionFactory) {
         super(sessionFactory);

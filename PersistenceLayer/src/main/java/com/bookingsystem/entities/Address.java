@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "ADDRESS")
-public class Address extends BaseEntity implements Comparable<Address>{
+final public class Address extends BaseEntity implements Comparable<Address>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

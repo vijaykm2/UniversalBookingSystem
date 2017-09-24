@@ -8,7 +8,7 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer extends BaseEntity implements Comparable<Customer> {
+final public class Customer extends BaseEntity implements Comparable<Customer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

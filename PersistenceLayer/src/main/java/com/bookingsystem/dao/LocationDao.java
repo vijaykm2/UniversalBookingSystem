@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * Created by vijay on 3/31/17.
  */
-public class LocationDao {
-    private SessionFactory sessionFactory;
+final public class LocationDao {
+    private final SessionFactory sessionFactory;
 
     public LocationDao(SessionFactory sessionFactory) {
         this.sessionFactory =sessionFactory;

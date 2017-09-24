@@ -14,7 +14,7 @@ import java.util.Map;
 public abstract class BaseEntityDao {
 
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     public BaseEntityDao(SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;

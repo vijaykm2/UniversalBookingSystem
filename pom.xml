@@ -9,7 +9,7 @@
     <java.version>1.8</java.version>
     <spring.version>4.3.11.RELEASE</spring.version>
     <spring-security.version>4.2.2.RELEASE</spring-security.version>
-    <cxf.version>3.1.10</cxf.version>
+    <cxf.version>3.2.0</cxf.version>
     <hibernate.version>5.2.11.Final</hibernate.version>
     <junit.version>4.12</junit.version>
     <hikaricp.version>2.7.1</hikaricp.version>

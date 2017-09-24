@@ -23,12 +23,7 @@
             <artifactId>PersistenceLayer</artifactId>
             <version>1.1-SNAPSHOT</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>

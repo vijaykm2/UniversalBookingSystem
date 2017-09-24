@@ -4,7 +4,7 @@ package com.bookingsystem;
  * Hello world!
  *
  */
-public class App 
+final public class App
 {
     public static void main( String[] args )
     {

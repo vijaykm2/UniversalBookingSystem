@@ -100,9 +100,9 @@ public class ReservationDaoTest {
         pax.forEach(p -> System.out.println(p.toString()));
 
         Reservation updatedRes =  new Reservation.Builder().setId(res.getId()).setArrival(res.getArrival())
-                .setArrivalDateTime(ZonedDateTime.ofInstant(res.getArrivalDateTime().toInstant(), res.getArrivalDateTime().getTimeZone().toZoneId()))
+                .setArrivalDateTime(res.getArrivalDateTime())
                 .setDeparture("NYC")
-                .setDepartureDateTime(ZonedDateTime.ofInstant(res.getDepartureDateTime().toInstant(), res.getDepartureDateTime().getTimeZone().toZoneId()))
+                .setDepartureDateTime(res.getDepartureDateTime())
                 .setCreatedTime(res.getCreatedTime())
                 .setCustomers(res.getCustomers())
                 .setLastModifiedTime(ZonedDateTime.now())

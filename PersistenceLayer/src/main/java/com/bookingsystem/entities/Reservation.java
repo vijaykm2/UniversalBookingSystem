@@ -12,38 +12,37 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "RESERVATION")
-public class Reservation extends BaseEntity implements Comparable<Reservation>{
+final public class Reservation extends BaseEntity implements Comparable<Reservation>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Long id;
+    private final Long id;
 
     @Column(name = "RESERVATION_ID", unique = true, nullable = false)
-    private String reservationId;
+    private final String reservationId;
 
     @Column(name = "CREATED_TIME")
-    private ZonedDateTime createdTime;
+    private final ZonedDateTime createdTime;
 
     @Column(name = "LAST_MODIFIED_TIME")
-    private ZonedDateTime lastModifiedTime;
+    private final ZonedDateTime lastModifiedTime;
 
     @Column(name = "ARRIVAL")
-    private String arrival;
+    private final String arrival;
 
     @Column(name = "DEPARTURE")
-    private String departure;
+    private final String departure;
 
     @Column(name = "DEPARTURE_DATE_TIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar departureDateTime;
+    private final ZonedDateTime departureDateTime;
 
     @Column (name = "ARRIVAL_DATE_TIME")
-    private Calendar arrivalDateTime;
+    private final ZonedDateTime arrivalDateTime;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
-    private Set<Customer> customers = new HashSet<Customer>();
+    private final Set<Customer> customers;
 
-    private Reservation(Long id, String reservationId, ZonedDateTime createdTime, ZonedDateTime lastModifiedTime, String arrival, String departure, Set<Customer> customers, Calendar departureDateTime, Calendar arrivalDateTime) {
+    private Reservation(Long id, String reservationId, ZonedDateTime createdTime, ZonedDateTime lastModifiedTime, String arrival, String departure, Set<Customer> customers, ZonedDateTime departureDateTime, ZonedDateTime arrivalDateTime) {
         this.id = id;
         this.reservationId = reservationId;
         this.createdTime = createdTime;
@@ -63,7 +62,9 @@ public class Reservation extends BaseEntity implements Comparable<Reservation>{
         departure = null;
         createdTime = null;
         lastModifiedTime = null;
-        customers = null;
+        customers = new HashSet<>();
+        departureDateTime = null;
+        arrivalDateTime = null;
     }
 
     public Long getId() {
@@ -94,11 +95,11 @@ public class Reservation extends BaseEntity implements Comparable<Reservation>{
         return customers;
     }
 
-    public Calendar getDepartureDateTime() {
+    public ZonedDateTime getDepartureDateTime() {
         return departureDateTime;
     }
 
-    public Calendar getArrivalDateTime() {
+    public ZonedDateTime getArrivalDateTime() {
         return arrivalDateTime;
     }
 
@@ -162,8 +163,8 @@ public class Reservation extends BaseEntity implements Comparable<Reservation>{
         private String arrival;
         private String departure;
         private Set<Customer> customers;
-        private GregorianCalendar arrivalDateTime;
-        private GregorianCalendar departureDateTime;
+        private ZonedDateTime arrivalDateTime;
+        private ZonedDateTime departureDateTime;
 
         public Builder setId(Long id) {
             this.id = id;
@@ -201,12 +202,12 @@ public class Reservation extends BaseEntity implements Comparable<Reservation>{
         }
 
         public Builder setArrivalDateTime(ZonedDateTime arrivalDateTime) {
-            this.arrivalDateTime = arrivalDateTime !=null ? GregorianCalendar.from(arrivalDateTime) : null;
+            this.arrivalDateTime = arrivalDateTime ;
             return this;
         }
 
         public Builder setDepartureDateTime(ZonedDateTime departureDateTime) {
-            this.departureDateTime = departureDateTime != null ? GregorianCalendar.from(departureDateTime): null;
+            this.departureDateTime = departureDateTime ;
             return this;
         }
 

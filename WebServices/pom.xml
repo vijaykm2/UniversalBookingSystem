@@ -10,6 +10,9 @@
     <packaging>jar</packaging>
     <name>WebServices Maven Webapp</name>
     <url>http://maven.apache.org</url>
+    <properties>
+        <start-class>com.ubs.main.Application</start-class>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.bookingsystem</groupId>
@@ -122,6 +125,22 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+
+                <version>${spring-boot-version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>${start-class}</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
