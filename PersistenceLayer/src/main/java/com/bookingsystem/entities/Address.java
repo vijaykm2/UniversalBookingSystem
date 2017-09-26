@@ -10,7 +10,7 @@ import javax.persistence.*;
 final public class Address extends BaseEntity implements Comparable<Address>{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private final Long id;
 

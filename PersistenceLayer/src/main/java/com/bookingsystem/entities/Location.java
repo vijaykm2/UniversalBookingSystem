@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "LOCATION")
 final public class Location extends BaseEntity implements Comparable<Location> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private final Long id;
 

@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "RESERVATION")
 final public class Reservation extends BaseEntity implements Comparable<Reservation>{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private final Long id;
 

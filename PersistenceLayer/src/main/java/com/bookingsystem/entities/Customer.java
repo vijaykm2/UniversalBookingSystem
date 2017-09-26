@@ -11,7 +11,7 @@ import java.time.LocalDate;
 final public class Customer extends BaseEntity implements Comparable<Customer> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private final Long id;
 
