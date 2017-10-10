@@ -19,7 +19,7 @@ final public class LocationDao {
 
     public void saveOrUpdate(Location airport, boolean isWithinSession) {
         Session session =sessionFactory.getCurrentSession();
-        if(airport.getId() == null ){
+        if(airport.id == null ){
             session.save(airport);
         }else {
             if(isWithinSession){

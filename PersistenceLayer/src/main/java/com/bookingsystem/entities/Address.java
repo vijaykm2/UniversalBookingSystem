@@ -12,25 +12,25 @@ final public class Address extends BaseEntity implements Comparable<Address>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private final Long id;
+    public final Long id;
 
     @Column(name = "ADDRESS_LINE_1")
-    private final String addressLine1;
+    public final String addressLine1;
 
     @Column(name = "ADDRESS_LINE_2")
-    private final String addressLine2;
+    public final String addressLine2;
 
     @Column(name = "CITY")
-    private final String city;
+    public final String city;
 
     @Column(name = "COUNTRY")
-    private final String country;
+    public final String country;
 
     @Column(name = "STATE")
-    private final String state;
+    public final String state;
 
     @Column(name = "ZIP_CODE")
-    private final String zipCode;
+    public final String zipCode;
 
     public Address(Long id, String addressLine1, String addressLine2, String city, String country, String state, String zipCode, Location location, Customer customer) {
         this.addressLine1 = addressLine1;
@@ -58,30 +58,6 @@ final public class Address extends BaseEntity implements Comparable<Address>{
         return id;
     }
 
-    public String getAddressLine1() {
-        return addressLine1;
-    }
-
-    public String getAddressLine2() {
-        return addressLine2;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
     @Override
     public int compareTo(Address address) {
         return this.addressLine1.compareTo(address.addressLine1);
@@ -94,25 +70,25 @@ final public class Address extends BaseEntity implements Comparable<Address>{
 
         Address address = (Address) o;
 
-        if (getAddressLine1() != null ? !getAddressLine1().equals(address.getAddressLine1()) : address.getAddressLine1() != null)
+        if (addressLine1 != null ? !addressLine1.equals(address.addressLine1) : address.addressLine1 != null)
             return false;
-        if (getAddressLine2() != null ? !getAddressLine2().equals(address.getAddressLine2()) : address.getAddressLine2() != null)
+        if (addressLine2 != null ? !addressLine2.equals(address.addressLine2) : address.addressLine2 != null)
             return false;
-        if (getCity() != null ? !getCity().equals(address.getCity()) : address.getCity() != null) return false;
-        if (getCountry() != null ? !getCountry().equals(address.getCountry()) : address.getCountry() != null)
+        if (city != null ? !city.equals(address.city) : address.city != null) return false;
+        if (country != null ? !country.equals(address.country) : address.country != null)
             return false;
-        if (getState() != null ? !getState().equals(address.getState()) : address.getState() != null) return false;
-        return getZipCode() != null ? getZipCode().equals(address.getZipCode()) : address.getZipCode() == null;
+        if (state != null ? !state.equals(address.state) : address.state != null) return false;
+        return zipCode != null ? zipCode.equals(address.zipCode) : address.zipCode == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getAddressLine1() != null ? getAddressLine1().hashCode() : 0;
-        result = 31 * result + (getAddressLine2() != null ? getAddressLine2().hashCode() : 0);
-        result = 31 * result + (getCity() != null ? getCity().hashCode() : 0);
-        result = 31 * result + (getCountry() != null ? getCountry().hashCode() : 0);
-        result = 31 * result + (getState() != null ? getState().hashCode() : 0);
-        result = 31 * result + (getZipCode() != null ? getZipCode().hashCode() : 0);
+        int result = addressLine1 != null ? addressLine1.hashCode() : 0;
+        result = 31 * result + (addressLine2 != null ? addressLine2.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (zipCode != null ? zipCode.hashCode() : 0);
         return result;
     }
 
@@ -175,13 +151,13 @@ final public class Address extends BaseEntity implements Comparable<Address>{
         }
 
         public AddressBuilder setAddress(Address address) {
-            this.id = address.getId();
-            this.addressLine1 = address.getAddressLine1();
-            this.addressLine2 = address.getAddressLine2();
-            this.city = address.getCity();
-            this.country = address.getCountry();
-            this.zipCode = address.getZipCode();
-            this.state = address.getState();
+            this.id = address.id;
+            this.addressLine1 = address.addressLine1;
+            this.addressLine2 = address.addressLine2;
+            this.city = address.city;
+            this.country = address.country;
+            this.zipCode = address.zipCode;
+            this.state = address.state;
             return this;
         }
 

@@ -12,25 +12,25 @@ final public class Location extends BaseEntity implements Comparable<Location> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private final Long id;
+    public final Long id;
 
     @Column(name = "LOCATION_NAME")
-    private final String locationName;
+    public final String locationName;
 
     @Column(name = "LOCATION_CODE")
-    private final String locationCode;
+    public final String locationCode;
 
     @Column(name = "LOCATION_TYPE")
     @Enumerated(EnumType.STRING)
-    private final LocationType locationType;
+    public final LocationType locationType;
 
     @Column(name = "CITY")
-    private final String city;
+    public final String city;
 
     @OneToOne( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MapsId
     @JoinColumn(name = "ADDRESS")
-    private final Address address;
+    public final Address address;
 
     private Location(Long id, String locationName, String locationCode, String city, Address address, LocationType locationType) {
         this.locationName = locationName;
@@ -53,19 +53,7 @@ final public class Location extends BaseEntity implements Comparable<Location> {
     public Long getId() {
         return id;
     }
-
-    public String getLocationName() {
-        return locationName;
-    }
-
-    public String getLocationCode() {
-        return locationCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
+    
     @Override
     public String toString() {
         return "Location{" +
@@ -83,18 +71,18 @@ final public class Location extends BaseEntity implements Comparable<Location> {
 
         Location location = (Location) o;
 
-        if (getLocationName() != null ? !getLocationName().equals(location.getLocationName()) : location.getLocationName() != null)
+        if (locationName != null ? !locationName.equals(location.locationName) : location.locationName != null)
             return false;
-        if (getLocationCode() != null ? !getLocationCode().equals(location.getLocationCode()) : location.getLocationCode() != null)
+        if (locationCode != null ? !locationCode.equals(location.locationCode) : location.locationCode != null)
             return false;
-        return getCity() != null ? getCity().equals(location.getCity()) : location.getCity() == null;
+        return city != null ? city.equals(location.city) : location.city == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getLocationName() != null ? getLocationName().hashCode() : 0;
-        result = 31 * result + (getLocationCode() != null ? getLocationCode().hashCode() : 0);
-        result = 31 * result + (getCity() != null ? getCity().hashCode() : 0);
+        int result = locationName != null ? locationName.hashCode() : 0;
+        result = 31 * result + (locationCode != null ? locationCode.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }
 
@@ -148,10 +136,10 @@ final public class Location extends BaseEntity implements Comparable<Location> {
         }
 
         public LocationBuilder setLocation(Location location) {
-            this.id = location.getId();
-            this.locationCode = location.getLocationCode();
-            this.locationName = location.getLocationName();
-            this.city = location.getCity();
+            this.id = location.id;
+            this.locationCode = location.locationCode;
+            this.locationName = location.locationName;
+            this.city = location.city;
             this.locationType = location.getLocationType();
             return this;
         }

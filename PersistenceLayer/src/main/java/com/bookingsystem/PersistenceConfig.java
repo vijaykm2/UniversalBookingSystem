@@ -83,13 +83,10 @@ public class PersistenceConfig {
                                          @Value("${hibernate.dialect}") String dialect,
                                          @Value("${hibernate.format_sql}") String formatSql,
                                          @Value("${hibernate.hbm2ddl}") String hbm2ddl){
-        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
         //sessionBuilder.setDataSource(dataSource);
-        sessionBuilder.addAnnotatedClasses(Reservation.class);
-        sessionBuilder.addAnnotatedClasses(Customer.class);
-        sessionBuilder.addAnnotatedClasses(Location.class);
-        sessionBuilder.addAnnotatedClasses(Address.class);
+        sessionBuilder.addAnnotatedClasses(Reservation.class, Customer.class, Location.class, Address.class);
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", dialect);
         hibernateProperties.put("hibernate.show_sql", showSql);
@@ -102,8 +99,7 @@ public class PersistenceConfig {
 
     @Bean(name = "transactionManager")
     public HibernateTransactionManager hibernateTransactionManager(@Value("#{sessionFactory}") SessionFactory sessionFactory){
-        HibernateTransactionManager htm = new HibernateTransactionManager();
-        htm.setSessionFactory(sessionFactory);
+        HibernateTransactionManager htm = new HibernateTransactionManager(sessionFactory);
         return htm;
 
     }

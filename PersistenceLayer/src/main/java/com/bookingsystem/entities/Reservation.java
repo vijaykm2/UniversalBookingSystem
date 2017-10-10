@@ -16,31 +16,31 @@ final public class Reservation extends BaseEntity implements Comparable<Reservat
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private final Long id;
+    public final Long id;
 
     @Column(name = "RESERVATION_ID", unique = true, nullable = false)
-    private final String reservationId;
+    public final String reservationId;
 
     @Column(name = "CREATED_TIME")
-    private final ZonedDateTime createdTime;
+    public final ZonedDateTime createdTime;
 
     @Column(name = "LAST_MODIFIED_TIME")
-    private final ZonedDateTime lastModifiedTime;
+    public final ZonedDateTime lastModifiedTime;
 
     @Column(name = "ARRIVAL")
-    private final String arrival;
+    public final String arrival;
 
     @Column(name = "DEPARTURE")
-    private final String departure;
+    public final String departure;
 
     @Column(name = "DEPARTURE_DATE_TIME")
-    private final ZonedDateTime departureDateTime;
+    public final ZonedDateTime departureDateTime;
 
     @Column (name = "ARRIVAL_DATE_TIME")
-    private final ZonedDateTime arrivalDateTime;
+    public final ZonedDateTime arrivalDateTime;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
-    private final Set<Customer> customers;
+    public final Set<Customer> customers;
 
     private Reservation(Long id, String reservationId, ZonedDateTime createdTime, ZonedDateTime lastModifiedTime, String arrival, String departure, Set<Customer> customers, ZonedDateTime departureDateTime, ZonedDateTime arrivalDateTime) {
         this.id = id;
@@ -69,38 +69,6 @@ final public class Reservation extends BaseEntity implements Comparable<Reservat
 
     public Long getId() {
         return id;
-    }
-
-    public String getReservationId() {
-        return reservationId;
-    }
-
-    public ZonedDateTime getCreatedTime() {
-        return createdTime;
-    }
-
-    public ZonedDateTime getLastModifiedTime() {
-        return lastModifiedTime;
-    }
-
-    public String getArrival() {
-        return arrival;
-    }
-
-    public String getDeparture() {
-        return departure;
-    }
-
-    public Set<Customer> getCustomers() {
-        return customers;
-    }
-
-    public ZonedDateTime getDepartureDateTime() {
-        return departureDateTime;
-    }
-
-    public ZonedDateTime getArrivalDateTime() {
-        return arrivalDateTime;
     }
 
     @Override

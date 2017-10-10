@@ -89,24 +89,24 @@ public class ReservationDaoTest {
         customerDao.saveOrUpdate(pax2, true);
         customerDao.saveOrUpdate(pax3, true);
 
-        Set<Customer> passengers = reservation.getCustomers();
+        Set<Customer> passengers = reservation.customers;
         passengers.add(pax1);
         passengers.add(pax2);
         passengers.add(pax3);
         reservationDao.saveOrUpdate(reservation);
 
-        Reservation res = reservationDao.findReservationById(reservation.getReservationId());
-        List<Customer> pax = customerDao.findPassengersByReservationId(reservation.getReservationId());
+        Reservation res = reservationDao.findReservationById(reservation.reservationId);
+        List<Customer> pax = customerDao.findPassengersByReservationId(reservation.reservationId);
         pax.forEach(p -> System.out.println(p.toString()));
 
-        Reservation updatedRes =  new Reservation.Builder().setId(res.getId()).setArrival(res.getArrival())
-                .setArrivalDateTime(res.getArrivalDateTime())
+        Reservation updatedRes =  new Reservation.Builder().setId(res.id).setArrival(res.arrival)
+                .setArrivalDateTime(res.arrivalDateTime)
                 .setDeparture("NYC")
-                .setDepartureDateTime(res.getDepartureDateTime())
-                .setCreatedTime(res.getCreatedTime())
-                .setCustomers(res.getCustomers())
+                .setDepartureDateTime(res.departureDateTime)
+                .setCreatedTime(res.createdTime)
+                .setCustomers(res.customers)
                 .setLastModifiedTime(ZonedDateTime.now())
-                .setReservationId(res.getReservationId())
+                .setReservationId(res.reservationId)
                 .build();
 
         System.out.println();
@@ -114,7 +114,7 @@ public class ReservationDaoTest {
 
         reservationDao.saveOrUpdate(updatedRes, true);
 
-        System.out.println(reservationDao.findReservationById(reservation.getReservationId()).toString());
+        System.out.println(reservationDao.findReservationById(reservation.reservationId).toString());
 
 
     }

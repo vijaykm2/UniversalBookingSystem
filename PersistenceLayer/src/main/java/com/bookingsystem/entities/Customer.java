@@ -13,33 +13,33 @@ final public class Customer extends BaseEntity implements Comparable<Customer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private final Long id;
+    public final Long id;
 
     @Column(name = "FIRST_NAME")
-    private final String firstName;
+    public final String firstName;
 
     @Column(name = "MIDDLE_NAME")
-    private final String middleName;
+    public final String middleName;
 
     @Column(name = "LAST_NAME")
-    private final String lastName;
+    public final String lastName;
 
     @Column(name = "DATE_OF_BIRTH")
-    private final LocalDate dob;
+    public final LocalDate dob;
 
     @Column(name = "GENDER")
-    private final String gender;
+    public final String gender;
 
     @Column( name = "EMAIL_ID")
-    private final String email;
+    public final String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "RESERVATION")
-    private final Reservation reservation;
+    public final Reservation reservation;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "ADDRESS")
-    private final Address address;
+    public final Address address;
 
 
     private Customer(Long id, String firstName, String middleName, String lastName, LocalDate dob, String gender, String email, Reservation reservation, Address address) {
@@ -70,26 +70,6 @@ final public class Customer extends BaseEntity implements Comparable<Customer> {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public Reservation getReservation() {
-        return reservation;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,10 +77,10 @@ final public class Customer extends BaseEntity implements Comparable<Customer> {
 
         Customer that = (Customer) o;
 
-        if (firstName != null ? !firstName.equals(that.getFirstName()) : that.getFirstName() != null) return false;
-        if (lastName != null ? !lastName.equals(that.getLastName()) : that.getLastName() != null) return false;
-        if (dob != null ? !dob.equals(that.getDob()) : that.getDob() != null) return false;
-        if (gender != null ? !gender.equals(that.getGender()) : that.getGender() != null) return false;
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        if (dob != null ? !dob.equals(that.dob) : that.dob != null) return false;
+        if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
         return true;
     }
 
@@ -229,11 +209,11 @@ final public class Customer extends BaseEntity implements Comparable<Customer> {
 
         public Builder setCustomer(Customer customer) {
             address = customer.getAddress();
-            id = customer.getId();
-            lastName = customer.getLastName();
+            id = customer.id;
+            lastName = customer.lastName;
             middleName = customer.middleName;
-            firstName = customer.getFirstName();
-            gender = customer.getGender();
+            firstName = customer.firstName;
+            gender = customer.gender;
             return this;
         }
 

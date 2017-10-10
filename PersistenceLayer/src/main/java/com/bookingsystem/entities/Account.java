@@ -11,7 +11,7 @@ import java.util.Set;
 public final class Account extends BaseEntity implements Comparable<Account> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private final Long id;
+    public final Long id;
 
     @Column(name="ACCOUNT_ID", unique = true)
     private final String accountId;
@@ -37,6 +37,9 @@ public final class Account extends BaseEntity implements Comparable<Account> {
 
     @Column
     private final String secret;
+
+    @Column
+    private final boolean isUsing2FA;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
@@ -85,7 +88,7 @@ public final class Account extends BaseEntity implements Comparable<Account> {
 
         if (enabled != account.enabled) return false;
         if (isUsing2FA != account.isUsing2FA) return false;
-        if (!getId().equals(account.getId())) return false;
+        if (!id.equals(account.id)) return false;
         if (firstName != null ? !firstName.equals(account.firstName) : account.firstName != null) return false;
         if (lastName != null ? !lastName.equals(account.lastName) : account.lastName != null) return false;
         if (middleName != null ? !middleName.equals(account.middleName) : account.middleName != null) return false;
@@ -96,7 +99,7 @@ public final class Account extends BaseEntity implements Comparable<Account> {
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
+        int result = id.hashCode();
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (middleName != null ? middleName.hashCode() : 0);
